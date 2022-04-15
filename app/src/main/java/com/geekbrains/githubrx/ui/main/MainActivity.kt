@@ -1,12 +1,12 @@
 package com.geekbrains.githubrx.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.geekbrains.githubrx.app
 import com.geekbrains.githubrx.databinding.ActivityMainBinding
-
 import com.geekbrains.githubrx.ui.main.adapter.RecyclerViewAdapter
 
 class MainActivity : AppCompatActivity() {
@@ -26,11 +26,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        viewModel.onShowList()
+        viewModel.onShowList() // показываем список пользователей
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 //        adapter.setHasStableIds(true) // сетит список (типа внутр. diffutils)
         binding.recyclerView.adapter = adapter
-
     }
 
     private fun initOutgoingEvents() {
@@ -44,6 +43,15 @@ class MainActivity : AppCompatActivity() {
         viewModel.repos.observe(this) {
             adapter.setData(it)
         }
+        progressBar()
     }
 
+    private fun progressBar() {
+        viewModel.inProgress.observe(this) { inProgress ->
+            binding.showButton.isEnabled = !inProgress
+            binding.usernameEditText.isEnabled = !inProgress
+            binding.recyclerView.isVisible = !inProgress
+            binding.progressBar.isVisible = inProgress
+        }
+    }
 }

@@ -50,7 +50,11 @@ class RecyclerViewAdapter() : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolde
             binding.itemGitLogin.text = users.login
 
             binding.cardViewMovie.setOnClickListener {
-                Toast.makeText(itemView.context, "клик: ${binding.itemGitRepoName.text}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    itemView.context,
+                    "клик: ${binding.itemGitRepoName.text}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

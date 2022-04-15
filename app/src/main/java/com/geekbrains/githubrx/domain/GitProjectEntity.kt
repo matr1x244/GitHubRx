@@ -6,4 +6,3 @@ data class GitProjectEntity(
     val login: String,
     val avatarUrl: String
 )
-
