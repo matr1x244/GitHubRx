@@ -51,8 +51,6 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     //RxKotlin
     implementation 'io.reactivex.rxjava3:rxkotlin:3.0.1'
-    //KOIN
-    implementation 'io.insert-koin:koin-android:3.0.2'
     //ViewModels
     implementation "androidx.fragment:fragment-ktx:1.5.0-alpha05"
     implementation "androidx.activity:activity-ktx:1.4.0"

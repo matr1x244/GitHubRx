@@ -7,10 +7,10 @@ import retrofit2.http.Path
 
 interface GitHubAPI {
 
-    @GET("users/{user}/repos")
+    @GET("/users/{user}/repos")
     fun listRepos(@Path("user") user: String): Single<List<GitProjectEntity>>
 
-    @GET("users")
+    @GET("/users")
     fun listUsers(): Single<List<GitProjectEntity>>
 
 }

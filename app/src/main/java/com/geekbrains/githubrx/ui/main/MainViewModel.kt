@@ -8,6 +8,7 @@ import com.geekbrains.githubrx.domain.Repository
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 
+
 class MainViewModel(private val getRepository: Repository) : ViewModel() {
 
     private val _repos = MutableLiveData<List<GitProjectEntity>>() // закидываем событие

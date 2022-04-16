@@ -2,6 +2,7 @@ package com.geekbrains.githubrx.domain
 
 import io.reactivex.rxjava3.core.Single
 
+
 interface Repository {
 
     fun observeReposForUser(username: String): Single<List<GitProjectEntity>>
