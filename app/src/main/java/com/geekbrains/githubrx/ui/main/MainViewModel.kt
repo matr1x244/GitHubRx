@@ -11,13 +11,13 @@ import io.reactivex.rxjava3.kotlin.subscribeBy
 
 class MainViewModel(private val getRepository: Repository) : ViewModel() {
 
-    private val _repos = MutableLiveData<List<GitProjectEntity>>()
-    val repos: LiveData<List<GitProjectEntity>> = _repos
+    private val _repos = MutableLiveData<List<GitProjectEntity>>() // закидываем событие
+    val repos: LiveData<List<GitProjectEntity>> = _repos // читаем событие
 
-    private val _inProgress = MutableLiveData<Boolean>()
-    val inProgress: LiveData<Boolean> = _inProgress
+    private val _inProgress = MutableLiveData<Boolean>() // закидываем событие
+    val inProgress: LiveData<Boolean> = _inProgress // читаем событие
 
-    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    private val compositeDisposable: CompositeDisposable = CompositeDisposable() // метод отписки RX
 
     fun onShowList() {
         _inProgress.postValue(true)
@@ -36,10 +36,15 @@ class MainViewModel(private val getRepository: Repository) : ViewModel() {
         compositeDisposable.add(
             getRepository
                 .observeReposForUser(username)
-                .subscribeBy {
-                    _inProgress.postValue(false)
-                    _repos.postValue(it)
-                }
+                .subscribeBy(
+                    onSuccess = {
+                        _inProgress.postValue(false)
+                        _repos.postValue(it)
+                    },
+                    onError = {
+                        //..
+                    }
+                )
         )
     }
 

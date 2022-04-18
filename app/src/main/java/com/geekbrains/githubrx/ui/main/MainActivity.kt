@@ -26,8 +26,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        viewModel.onShowList()
+        viewModel.onShowList() // показываем список пользователей
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter.setHasStableIds(true) // сетит список (типа внутр. diffutils)
         binding.recyclerView.adapter = adapter
     }
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/container_item_users">
+    android:id="@+id/container_item_repository_name.xml">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -69,25 +69,14 @@
                     android:id="@+id/item_git_repo_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/base_5dp"
+                    android:layout_marginTop="@dimen/base_5dp"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="item_git_repo_name"
                     android:textColor="@color/black"
-                    android:layout_marginTop="@dimen/base_5dp"
-                    android:layout_marginStart="@dimen/base_5dp"
-                    app:layout_constraintStart_toEndOf="@+id/avatar_url"
-                    app:layout_constraintTop_toBottomOf="@id/barrier" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/item_git_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="item_git_name"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="@dimen/base_5dp"
-                    android:layout_marginStart="@dimen/base_5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/avatar_url"
                     app:layout_constraintTop_toBottomOf="@id/barrier" />
 
@@ -97,6 +86,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/base_5dp"
                     android:text="item_git_repo_id"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/avatar_url"
                     app:layout_constraintTop_toBottomOf="@+id/item_git_repo_name" />
 
