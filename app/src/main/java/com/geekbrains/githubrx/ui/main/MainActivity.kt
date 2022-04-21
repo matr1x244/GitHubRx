@@ -7,7 +7,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.geekbrains.githubrx.app
 import com.geekbrains.githubrx.databinding.ActivityMainBinding
-import com.geekbrains.githubrx.domain.Repository
 import com.geekbrains.githubrx.ui.main.adapter.RecyclerViewAdapter
 
 class MainActivity : AppCompatActivity() {
@@ -15,8 +14,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels { MainViewModelFactory(app.getRepository) }
     private val adapter = RecyclerViewAdapter()
-
-    private val getRepository: Repository by lazy { app.getRepository }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,18 +23,21 @@ class MainActivity : AppCompatActivity() {
         initViews()
         initOutgoingEvents()
         initIncomingEvents()
-
     }
 
     private fun initViews() {
         viewModel.onShowList() // показываем список пользователей
+        recyclerViewMain()
+    }
+
+    private fun recyclerViewMain() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter.setHasStableIds(true) // сетит список (типа внутр. diffutils)
+//        adapter.setHasStableIds(true) // сетит список (типа внутр. diffutils)
         binding.recyclerView.adapter = adapter
     }
 
     private fun initOutgoingEvents() {
-        binding.showButton.setOnClickListener {
+        binding.inputLayoutTextWindow.setEndIconOnClickListener{
             val username = binding.usernameEditText.text.toString()
             viewModel.onShowRepository(username)
         }
@@ -52,8 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun progressBar() {
         viewModel.inProgress.observe(this) { inProgress ->
-            binding.showButton.isEnabled = !inProgress
-            binding.usernameEditText.isEnabled = !inProgress
+            binding.inputLayoutTextWindow.isEnabled =!inProgress
             binding.recyclerView.isVisible = !inProgress
             binding.progressBar.isVisible = inProgress
         }

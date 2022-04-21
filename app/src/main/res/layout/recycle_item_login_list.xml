@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_item_login_list"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/container_item_login_list.xml">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,13 +12,13 @@
         android:orientation="vertical">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_view_movie"
+            android:id="@+id/card_view_login_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardCornerRadius="@dimen/base_5dp"
-            app:cardElevation="@dimen/base_5dp"
             android:layout_margin="@dimen/base_5dp"
-            android:hapticFeedbackEnabled="false">
+            android:hapticFeedbackEnabled="false"
+            app:cardCornerRadius="@dimen/base_5dp"
+            app:cardElevation="@dimen/base_5dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -29,25 +29,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:barrierDirection="bottom"
-                    app:constraint_referenced_ids="guidelineTop"
+                    app:constraint_referenced_ids="guideline_top"
                     tools:ignore="NotSibling" />
 
                 <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guidelineTop"
+                    android:id="@+id/guideline_top"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     app:layout_constraintGuide_begin="@dimen/base_5dp" />
 
                 <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guidelineBottom"
+                    android:id="@+id/guideline_bottom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     app:layout_constraintGuide_begin="100dp" />
 
                 <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guidelineStart"
+                    android:id="@+id/guideline_start"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -60,9 +60,10 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginStart="4dp"
                     android:cropToPadding="true"
-                    app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
-                    app:layout_constraintStart_toEndOf="@id/guidelineStart"
-                    app:layout_constraintTop_toBottomOf="@+id/guidelineTop"
+                    app:circularflow_defaultRadius="@dimen/base_5dp"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
+                    app:layout_constraintStart_toEndOf="@id/guideline_start"
+                    app:layout_constraintTop_toBottomOf="@+id/guideline_top"
                     app:layout_constraintVertical_bias="0.0" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -73,23 +74,27 @@
                     android:layout_marginTop="@dimen/base_5dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="item_git_login"
+                    android:text="@string/item_git_login"
                     android:textColor="@color/black"
-                    app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.047"
                     app:layout_constraintStart_toEndOf="@+id/avatar_url"
-                    app:layout_constraintTop_toBottomOf="@id/barrier" />
+                    app:layout_constraintTop_toBottomOf="@id/barrier"
+                    app:layout_constraintVertical_bias="0.084" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/item_git_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/base_5dp"
-                    android:text="item_git_id"
-                    app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
+                    android:text="@string/item_git_id"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.043"
                     app:layout_constraintStart_toEndOf="@+id/avatar_url"
-                    app:layout_constraintTop_toBottomOf="@+id/item_git_login" />
+                    app:layout_constraintTop_toBottomOf="@+id/item_git_login"
+                    app:layout_constraintVertical_bias="0.13" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

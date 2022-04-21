@@ -36,15 +36,10 @@ class MainViewModel(private val getRepository: Repository) : ViewModel() {
         compositeDisposable.add(
             getRepository
                 .observeReposForUser(username)
-                .subscribeBy(
-                    onSuccess = {
+                .subscribeBy {
                         _inProgress.postValue(false)
                         _repos.postValue(it)
-                    },
-                    onError = {
-                        //..
-                    }
-                )
+                }
         )
     }
 

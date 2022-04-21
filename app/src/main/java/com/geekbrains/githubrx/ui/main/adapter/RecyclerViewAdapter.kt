@@ -1,25 +1,22 @@
 package com.geekbrains.githubrx.ui.main.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import coil.size.Precision
-import coil.size.Scale
-import com.geekbrains.githubrx.databinding.RecycleItemLoginListBinding
-import com.geekbrains.githubrx.databinding.RecycleItemRepositoryDetailBinding
 import com.geekbrains.githubrx.domain.GitProjectEntity
+import com.geekbrains.githubrx.ui.main.adapter.RecyclerViewAdapter.DbConstantsViewHolder.ListUsers
+import com.geekbrains.githubrx.ui.main.adapter.RecyclerViewAdapter.DbConstantsViewHolder.RepositoryUser
 import com.geekbrains.githubrx.ui.main.adapter.viewHolder.BaseViewHolder
 import com.geekbrains.githubrx.ui.main.adapter.viewHolder.ViewHolderListUsers
 import com.geekbrains.githubrx.ui.main.adapter.viewHolder.ViewHolderRepositoryUser
-import java.time.temporal.TemporalQueries.precision
 
 
 class RecyclerViewAdapter() : RecyclerView.Adapter<BaseViewHolder>() {
+
+    object DbConstantsViewHolder {
+        const val ListUsers = 0
+        const val RepositoryUser = 1
+    }
 
     private var userList: MutableList<GitProjectEntity> = mutableListOf()
 
@@ -32,7 +29,7 @@ class RecyclerViewAdapter() : RecyclerView.Adapter<BaseViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return when (viewType) {
-            0 -> {
+            ListUsers -> {
                 ViewHolderListUsers.createView(parent)
             }
             else -> {
@@ -46,10 +43,11 @@ class RecyclerViewAdapter() : RecyclerView.Adapter<BaseViewHolder>() {
     }
 
     override fun getItemViewType(position: Int): Int { // это для двух ViewHolder метод переключения
-        return if (userList[position].login == null) {
-            1 // ViewHolderRepositoryUser
+        val zero = null
+        return if (userList[position].login == zero) {
+            RepositoryUser // ViewHolderRepositoryUser
         } else {
-            0 // ViewHolderListUsers
+            ListUsers // ViewHolderListUsers
         }
     }
 

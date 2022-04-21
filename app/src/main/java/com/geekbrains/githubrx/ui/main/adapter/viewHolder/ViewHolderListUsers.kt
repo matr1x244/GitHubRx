@@ -30,7 +30,7 @@ class ViewHolderListUsers(itemView: View) : BaseViewHolder(itemView) {
         }
         binding.itemGitId.text = item.id.toString()
         binding.itemGitLogin.text = item.login
-        binding.cardViewMovie.setOnClickListener {
+        binding.cardViewLoginContainer.setOnClickListener {
             Toast.makeText(
                 itemView.context,
                 "клик: ${binding.itemGitLogin.text}",

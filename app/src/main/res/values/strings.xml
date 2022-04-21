@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">GitHubRx</string>
+    <string name="nickname">Введите nickname</string>
+    <string name="helper_text">Введите nickname для списка repository</string>
+    <string name="base_nick_name">matr1x244</string>
+    <string name="item_git_login">item_git_login</string>
+    <string name="item_git_id">item_git_id</string>
+    <string name="item_git_repo_name">item_git_repo_name</string>
+    <string name="item_git_repo_id">item_git_repo_id</string>
 </resources>

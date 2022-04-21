@@ -30,7 +30,7 @@ class ViewHolderRepositoryUser(itemView: View) : BaseViewHolder(itemView) {
         }
         binding.itemGitRepoId.text = item.id.toString()
         binding.itemGitRepoName.text = item.name
-        binding.cardViewMovie.setOnClickListener {
+        binding.cardViewRepositoryContainer.setOnClickListener {
             Toast.makeText(
                 itemView.context,
                 "клик: ${binding.itemGitRepoName.text}",
