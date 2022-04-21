@@ -9,4 +9,6 @@ interface Repository {
 
     fun observerReposListUser(): Single<List<GitProjectEntity>>
 
+    fun observerLogin(user: String): Single<List<GitProjectEntity>>
+
 }

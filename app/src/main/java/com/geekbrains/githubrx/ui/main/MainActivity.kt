@@ -41,6 +41,10 @@ class MainActivity : AppCompatActivity() {
             val username = binding.usernameEditText.text.toString()
             viewModel.onShowRepository(username)
         }
+        binding.inputLayoutTextWindow.setStartIconOnClickListener {
+            val user = binding.usernameEditText.text.toString()
+            viewModel.onShowLogin(user)
+        }
     }
 
     private fun initIncomingEvents() {

@@ -43,6 +43,18 @@ class MainViewModel(private val getRepository: Repository) : ViewModel() {
         )
     }
 
+    fun onShowLogin(user: String){
+        _inProgress.postValue(true)
+        compositeDisposable.add(
+            getRepository
+                .observerLogin(user)
+                .subscribeBy {
+                    _inProgress.postValue(false)
+                    _repos.postValue(it)
+                }
+        )
+    }
+
     override fun onCleared() {
         compositeDisposable.clear()
         super.onCleared()

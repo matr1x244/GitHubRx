@@ -26,4 +26,8 @@ class RetrofitRequestImpl : Repository {
     override fun observerReposListUser(): Single<List<GitProjectEntity>> {
         return api.listUsers()
     }
+
+    override fun observerLogin(user: String): Single<List<GitProjectEntity>> {
+        return api.login(user)
+    }
 }

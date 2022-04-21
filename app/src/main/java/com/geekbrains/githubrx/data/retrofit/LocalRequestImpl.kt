@@ -21,4 +21,11 @@ class LocalRequestImpl : Repository {
         )
         return Single.just(localList)
     }
+
+    override fun observerLogin(login: String): Single<List<GitProjectEntity>> {
+        val localList = listOf(
+        GitProjectEntity(55, "login", "", "")
+        )
+        return Single.just(localList)
+    }
 }
