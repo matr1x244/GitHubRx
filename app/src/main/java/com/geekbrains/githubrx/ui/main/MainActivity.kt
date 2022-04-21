@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.geekbrains.githubrx.app
 import com.geekbrains.githubrx.databinding.ActivityMainBinding
+import com.geekbrains.githubrx.domain.Repository
 import com.geekbrains.githubrx.ui.main.adapter.RecyclerViewAdapter
 
 class MainActivity : AppCompatActivity() {
@@ -14,6 +15,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels { MainViewModelFactory(app.getRepository) }
     private val adapter = RecyclerViewAdapter()
+
+    private val getRepository: Repository by lazy { app.getRepository }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         initViews()
         initOutgoingEvents()
         initIncomingEvents()
+
     }
 
     private fun initViews() {
