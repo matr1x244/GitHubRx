@@ -1,4 +1,4 @@
-package com.geekbrains.githubrx.data.retrofit
+package com.geekbrains.githubrx.data.local
 
 import com.geekbrains.githubrx.domain.GitProjectEntity
 import com.geekbrains.githubrx.domain.Repository
@@ -22,7 +22,7 @@ class LocalRequestImpl : Repository {
         return Single.just(localList)
     }
 
-    override fun observerLogin(login: String): Single<List<GitProjectEntity>> {
+    override fun observerLogin(username: String): Single<List<GitProjectEntity>> {
         val localList = listOf(
         GitProjectEntity(55, "login", "", "")
         )

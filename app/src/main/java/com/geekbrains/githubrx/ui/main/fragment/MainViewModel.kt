@@ -1,4 +1,4 @@
-package com.geekbrains.githubrx.ui.main
+package com.geekbrains.githubrx.ui.main.fragment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -43,16 +43,8 @@ class MainViewModel(private val getRepository: Repository) : ViewModel() {
         )
     }
 
-    fun onShowLogin(user: String){
-        _inProgress.postValue(true)
-        compositeDisposable.add(
-            getRepository
-                .observerLogin(user)
-                .subscribeBy {
-                    _inProgress.postValue(false)
-                    _repos.postValue(it)
-                }
-        )
+    interface Controller {
+        fun openDetailFragment(gitProjectEntity: GitProjectEntity)
     }
 
     override fun onCleared() {

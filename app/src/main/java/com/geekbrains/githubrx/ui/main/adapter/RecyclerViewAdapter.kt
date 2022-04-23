@@ -11,7 +11,7 @@ import com.geekbrains.githubrx.ui.main.adapter.viewHolder.ViewHolderListUsers
 import com.geekbrains.githubrx.ui.main.adapter.viewHolder.ViewHolderRepositoryUser
 
 
-class RecyclerViewAdapter() : RecyclerView.Adapter<BaseViewHolder>() {
+class RecyclerViewAdapter(private val itemClick : (GitProjectEntity) -> Unit) : RecyclerView.Adapter<BaseViewHolder>() {
 
     object DbConstantsViewHolder {
         const val ListUsers = 0
@@ -39,7 +39,7 @@ class RecyclerViewAdapter() : RecyclerView.Adapter<BaseViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), itemClick)
     }
 
     override fun getItemViewType(position: Int): Int { // это для двух ViewHolder метод переключения
@@ -51,57 +51,7 @@ class RecyclerViewAdapter() : RecyclerView.Adapter<BaseViewHolder>() {
         }
     }
 
-
     private fun getItem(position: Int): GitProjectEntity = userList[position]
 
     override fun getItemCount() = userList.size
-
-//    abstract class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-//        abstract fun bind(users: GitProjectEntity)
-//    }
-
-//    inner class ViewHolderListUsers(view: View) : BaseViewHolder(view) {
-//        override fun bind(users: GitProjectEntity) {
-//            RecycleItemLoginListBinding.bind(itemView).apply {
-//                Log.d("avatarUrl", "avatarUrl")
-//                val avatarUrl = "https://avatars.githubusercontent.com/u/${users.id}?v=4"
-//               avatarUrl.load(avatarUrl) {
-//                    precision(Precision.EXACT)
-//                    scale(Scale.FILL)
-//                }
-//
-//                itemGitId.text = users.id.toString()
-//                itemGitLogin.text = users.login
-//                cardViewMovie.setOnClickListener {
-//                    Toast.makeText(
-//                        itemView.context,
-//                        "клик: ${itemGitLogin.text}",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//            }
-//        }
-//    }
-//
-//
-//    inner class ViewHolderRepositoryUser(view: View) : BaseViewHolder(view) {
-//        override fun bind(users: GitProjectEntity) {
-//            RecycleItemRepositoryDetailBinding.bind(itemView).apply {
-//                val avatarUrl = "https://avatars.githubusercontent.com/u/${users.id}?v=4"
-//                binding.avatarUrl.load(avatarUrl) {
-//                    precision(Precision.EXACT)
-//                    scale(Scale.FILL)
-//                }
-//                itemGitRepoId.text = users.id.toString()
-//                itemGitRepoName.text = users.name
-//                cardViewMovie.setOnClickListener {
-//                    Toast.makeText(
-//                        itemView.context,
-//                        "клик: ${itemGitRepoName.text}",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//            }
-//        }
-//    }
 }

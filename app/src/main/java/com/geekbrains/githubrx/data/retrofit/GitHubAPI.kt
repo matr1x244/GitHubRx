@@ -14,6 +14,6 @@ interface GitHubAPI {
     fun listUsers(): Single<List<GitProjectEntity>>
 
     @GET("/users/{user}")
-    fun login(@Path("user") user: String): Single<List<GitProjectEntity>>
+    fun userRepository(@Path("user") user: String): Single<List<GitProjectEntity>>
 
 }

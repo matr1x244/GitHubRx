@@ -22,7 +22,7 @@ class ViewHolderRepositoryUser(itemView: View) : BaseViewHolder(itemView) {
         }
     }
 
-    override fun bind(item: GitProjectEntity) {
+    override fun bind(item: GitProjectEntity, listener: (GitProjectEntity) -> Unit) {
         val avatarUrl = "https://avatars.githubusercontent.com/u/${item.id}?v=4"
         binding.avatarUrl.load(avatarUrl) {
             precision(Precision.EXACT)
@@ -31,11 +31,7 @@ class ViewHolderRepositoryUser(itemView: View) : BaseViewHolder(itemView) {
         binding.itemGitRepoId.text = item.id.toString()
         binding.itemGitRepoName.text = item.name
         binding.cardViewRepositoryContainer.setOnClickListener {
-            Toast.makeText(
-                itemView.context,
-                "клик: ${binding.itemGitRepoName.text}",
-                Toast.LENGTH_SHORT
-            ).show()
+            listener.invoke(item)
         }
     }
 }
