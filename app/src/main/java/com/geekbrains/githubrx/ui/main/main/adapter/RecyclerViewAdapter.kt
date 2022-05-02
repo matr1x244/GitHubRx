@@ -1,17 +1,17 @@
-package com.geekbrains.githubrx.ui.main.adapter
+package com.geekbrains.githubrx.ui.main.main.adapter
 
 import android.annotation.SuppressLint
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.githubrx.domain.GitProjectEntity
-import com.geekbrains.githubrx.ui.main.adapter.RecyclerViewAdapter.DbConstantsViewHolder.ListUsers
-import com.geekbrains.githubrx.ui.main.adapter.RecyclerViewAdapter.DbConstantsViewHolder.RepositoryUser
-import com.geekbrains.githubrx.ui.main.adapter.viewHolder.BaseViewHolder
-import com.geekbrains.githubrx.ui.main.adapter.viewHolder.ViewHolderListUsers
-import com.geekbrains.githubrx.ui.main.adapter.viewHolder.ViewHolderRepositoryUser
+import com.geekbrains.githubrx.ui.main.main.adapter.RecyclerViewAdapter.DbConstantsViewHolder.ListUsers
+import com.geekbrains.githubrx.ui.main.main.adapter.RecyclerViewAdapter.DbConstantsViewHolder.RepositoryUser
+import com.geekbrains.githubrx.ui.main.main.adapter.viewHolder.ViewHolder
+import com.geekbrains.githubrx.ui.main.main.adapter.viewHolder.ViewHolderListUsers
+import com.geekbrains.githubrx.ui.main.main.adapter.viewHolder.ViewHolderRepositoryUser
 
 
-class RecyclerViewAdapter(private val itemClick : (GitProjectEntity) -> Unit) : RecyclerView.Adapter<BaseViewHolder>() {
+class RecyclerViewAdapter(private val itemClick : (GitProjectEntity) -> Unit) : RecyclerView.Adapter<ViewHolder>() {
 
     object DbConstantsViewHolder {
         const val ListUsers = 0
@@ -27,7 +27,7 @@ class RecyclerViewAdapter(private val itemClick : (GitProjectEntity) -> Unit) : 
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return when (viewType) {
             ListUsers -> {
                 ViewHolderListUsers.createView(parent)
@@ -38,7 +38,7 @@ class RecyclerViewAdapter(private val itemClick : (GitProjectEntity) -> Unit) : 
         }
     }
 
-    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position), itemClick)
     }
 

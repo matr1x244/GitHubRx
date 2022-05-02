@@ -5,9 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.geekbrains.githubrx.R
 import com.geekbrains.githubrx.databinding.ActivityMainBinding
 import com.geekbrains.githubrx.domain.GitProjectEntity
+import com.geekbrains.githubrx.domain.GitProjectUserDetail
 import com.geekbrains.githubrx.ui.main.detail.DetailFragment
-import com.geekbrains.githubrx.ui.main.fragment.FragmentMain
-import com.geekbrains.githubrx.ui.main.fragment.MainViewModel
+import com.geekbrains.githubrx.ui.main.main.FragmentMain
+import com.geekbrains.githubrx.ui.main.main.MainViewModel
 
 class MainActivity : AppCompatActivity(), MainViewModel.Controller {
 
@@ -31,4 +32,6 @@ class MainActivity : AppCompatActivity(), MainViewModel.Controller {
             .replace(R.id.container_main, DetailFragment.newInstance(gitProjectEntity))
             .commit()
     }
+
+
 }

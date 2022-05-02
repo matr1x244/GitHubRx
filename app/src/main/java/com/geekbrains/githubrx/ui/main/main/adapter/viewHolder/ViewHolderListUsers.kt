@@ -1,24 +1,23 @@
-package com.geekbrains.githubrx.ui.main.adapter.viewHolder
+package com.geekbrains.githubrx.ui.main.main.adapter.viewHolder
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import coil.load
 import coil.size.Precision
 import coil.size.Scale
 import com.geekbrains.githubrx.R
-import com.geekbrains.githubrx.databinding.RecycleItemRepositoryDetailBinding
+import com.geekbrains.githubrx.databinding.RecycleItemLoginListBinding
 import com.geekbrains.githubrx.domain.GitProjectEntity
 
-class ViewHolderRepositoryUser(itemView: View) : BaseViewHolder(itemView) {
-    private val binding = RecycleItemRepositoryDetailBinding.bind(itemView)
+class ViewHolderListUsers(itemView: View) : ViewHolder(itemView) {
+    private val binding = RecycleItemLoginListBinding.bind(itemView)
 
     companion object {
-        fun createView(parent: ViewGroup): ViewHolderRepositoryUser {
+        fun createView(parent: ViewGroup): ViewHolderListUsers {
             val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.recycle_item_repository_detail, parent, false)
-            return ViewHolderRepositoryUser(view)
+                .inflate(R.layout.recycle_item_login_list, parent, false)
+            return ViewHolderListUsers(view)
         }
     }
 
@@ -28,9 +27,10 @@ class ViewHolderRepositoryUser(itemView: View) : BaseViewHolder(itemView) {
             precision(Precision.EXACT)
             scale(Scale.FILL)
         }
-        binding.itemGitRepoId.text = item.id.toString()
-        binding.itemGitRepoName.text = item.name
-        binding.cardViewRepositoryContainer.setOnClickListener {
+        binding.itemGitId.text = item.id.toString()
+        binding.itemGitLogin.text = item.login
+        binding.itemGitLocation.text = item.location
+        binding.cardViewLoginContainer.setOnClickListener {
             listener.invoke(item)
         }
     }

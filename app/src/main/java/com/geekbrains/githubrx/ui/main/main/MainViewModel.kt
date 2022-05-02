@@ -1,15 +1,16 @@
-package com.geekbrains.githubrx.ui.main.fragment
+package com.geekbrains.githubrx.ui.main.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.geekbrains.githubrx.domain.GitProjectEntity
-import com.geekbrains.githubrx.domain.Repository
+import com.geekbrains.githubrx.domain.GitProjectUserDetail
+import com.geekbrains.githubrx.domain.RepositoryList
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 
 
-class MainViewModel(private val getRepository: Repository) : ViewModel() {
+class MainViewModel(private val getRepositoryList: RepositoryList) : ViewModel() {
 
     private val _repos = MutableLiveData<List<GitProjectEntity>>() // закидываем событие
     val repos: LiveData<List<GitProjectEntity>> = _repos // читаем событие
@@ -22,7 +23,7 @@ class MainViewModel(private val getRepository: Repository) : ViewModel() {
     fun onShowList() {
         _inProgress.postValue(true)
         compositeDisposable.add(
-            getRepository
+            getRepositoryList
                 .observerReposListUser()
                 .subscribeBy {
                     _inProgress.postValue(false)
@@ -34,7 +35,7 @@ class MainViewModel(private val getRepository: Repository) : ViewModel() {
     fun onShowRepository(username: String) {
         _inProgress.postValue(true)
         compositeDisposable.add(
-            getRepository
+            getRepositoryList
                 .observeReposForUser(username)
                 .subscribeBy {
                         _inProgress.postValue(false)

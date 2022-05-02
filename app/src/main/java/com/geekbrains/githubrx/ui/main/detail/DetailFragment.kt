@@ -6,16 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import coil.load
 import com.geekbrains.githubrx.app
 import com.geekbrains.githubrx.databinding.FragmentDetailBinding
 import com.geekbrains.githubrx.domain.GitProjectEntity
+import com.geekbrains.githubrx.domain.GitProjectUserDetail
 
 class DetailFragment : Fragment() {
 
-    private val viewModel: DetailViewModel by viewModels { DetailViewModelFactory(app.getRepository) }
+    private val viewModel: DetailViewModel by viewModels { DetailViewModelFactory(app.getHubDetailUser) }
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
+
 
     companion object {
         const val ARGS_KEY = "ARGS_KEY"
@@ -38,26 +41,31 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        detailLoadingFragment()
-
+        initViews()
+        initIncomingEvents()
     }
 
-    private fun detailLoadingFragment() {
-        val test = detailTestingArguments()
-        val username = binding.usernameEditText.text.toString()
-        if (test == null) {
-            binding.textTesting.text
-        } else {
-            viewModel.repos.observe(viewLifecycleOwner) {
-                binding.textTesting.text = binding.usernameEditText.toString()
-            }
+    private fun initViews() {
+        detailArguments()
+        val avatarUrl = "https://avatars.githubusercontent.com/u/${detailArguments()?.id}?v=4"
+        if (detailArguments()?.login != null){
+            binding.textNameLogin.text = detailArguments()?.login
+        } else{
+            binding.textNameLogin.text = detailArguments()?.name
         }
-        viewModel.onShowLogin(username)
+        binding.textLocation.text = detailArguments()?.location
+        binding.avatarUrl.load(avatarUrl)
     }
 
-
-    private fun detailTestingArguments(): GitProjectEntity? {
+    private fun detailArguments(): GitProjectEntity? {
         return arguments?.getParcelable(ARGS_KEY)
+    }
+
+    private fun initIncomingEvents() {
+        viewModel.repos.observe(viewLifecycleOwner) {
+            val username = binding.textNameLogin.toString()
+           viewModel.onShowLogin(username) // подхватываем обновления и запрашиваем
+        }
     }
 
     override fun onDestroyView() {

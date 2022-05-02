@@ -1,4 +1,4 @@
-package com.geekbrains.githubrx.ui.main.fragment
+package com.geekbrains.githubrx.ui.main.main
 
 import android.content.Context
 import android.os.Bundle
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.geekbrains.githubrx.R
 import com.geekbrains.githubrx.app
 import com.geekbrains.githubrx.databinding.FragmentMainBinding
-import com.geekbrains.githubrx.ui.main.adapter.RecyclerViewAdapter
+import com.geekbrains.githubrx.ui.main.main.adapter.RecyclerViewAdapter
 import com.geekbrains.githubrx.ui.main.detail.DetailFragment
 
 class FragmentMain: Fragment() {
@@ -24,7 +24,7 @@ class FragmentMain: Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: MainViewModel by viewModels { MainViewModelFactory(app.getRepository) }
+    private val viewModel: MainViewModel by viewModels { MainViewModelFactory(app.getHubListUser) }
 
     private val controller by lazy { activity as MainViewModel.Controller }
 
@@ -79,7 +79,6 @@ class FragmentMain: Fragment() {
                 .replace(R.id.container_main, DetailFragment.newInstance(null))
                 .commit()
             }
-
         }
     }
 
