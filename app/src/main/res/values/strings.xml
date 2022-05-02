@@ -7,4 +7,5 @@
     <string name="item_git_id">item_git_id</string>
     <string name="item_git_repo_name">item_git_repo_name</string>
     <string name="item_git_repo_id">item_git_repo_id</string>
+    <string name="item_git_location">item_git_location</string>
 </resources>

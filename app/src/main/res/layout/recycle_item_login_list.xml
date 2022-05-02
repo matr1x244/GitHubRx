@@ -96,6 +96,19 @@
                     app:layout_constraintTop_toBottomOf="@+id/item_git_login"
                     app:layout_constraintVertical_bias="0.13" />
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/item_git_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/base_5dp"
+                    android:text="@string/item_git_location"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.043"
+                    app:layout_constraintStart_toEndOf="@+id/avatar_url"
+                    app:layout_constraintTop_toBottomOf="@+id/item_git_login"
+                    app:layout_constraintVertical_bias="0.652" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
