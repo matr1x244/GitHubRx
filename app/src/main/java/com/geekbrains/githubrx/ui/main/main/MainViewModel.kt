@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.geekbrains.githubrx.domain.GitProjectEntity
-import com.geekbrains.githubrx.domain.GitProjectUserDetail
 import com.geekbrains.githubrx.domain.RepositoryList
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.subscribeBy
@@ -25,10 +24,15 @@ class MainViewModel(private val getRepositoryList: RepositoryList) : ViewModel()
         compositeDisposable.add(
             getRepositoryList
                 .observerReposListUser()
-                .subscribeBy {
-                    _inProgress.postValue(false)
-                    _repos.postValue(it)
-                }
+                .subscribeBy(
+                    onSuccess = {
+                        _inProgress.postValue(false)
+                        _repos.postValue(it)
+                    },
+                    onError = {
+                        _inProgress.postValue(false)
+                    }
+                )
         )
     }
 
@@ -37,15 +41,21 @@ class MainViewModel(private val getRepositoryList: RepositoryList) : ViewModel()
         compositeDisposable.add(
             getRepositoryList
                 .observeReposForUser(username)
-                .subscribeBy {
+                .subscribeBy(
+                    onSuccess = {
                         _inProgress.postValue(false)
                         _repos.postValue(it)
-                }
+                    },
+                    onError = {
+                        _inProgress.postValue(false)
+                    }
+                )
         )
     }
 
     interface Controller {
-        fun openDetailFragment(gitProjectEntity: GitProjectEntity)
+        fun openDetailFragment(gitProjectEntity: GitProjectEntity) {
+        }
     }
 
     override fun onCleared() {

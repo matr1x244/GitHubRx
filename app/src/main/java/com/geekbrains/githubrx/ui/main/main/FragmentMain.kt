@@ -15,12 +15,14 @@ import com.geekbrains.githubrx.app
 import com.geekbrains.githubrx.databinding.FragmentMainBinding
 import com.geekbrains.githubrx.ui.main.main.adapter.RecyclerViewAdapter
 import com.geekbrains.githubrx.ui.main.detail.DetailFragment
+import com.google.android.material.snackbar.Snackbar
 
-class FragmentMain: Fragment() {
+class FragmentMain : Fragment() {
 
     companion object {
         fun newInstance() = FragmentMain()
     }
+
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
@@ -70,14 +72,18 @@ class FragmentMain: Fragment() {
     private fun initOutgoingEvents() {
         binding.inputLayoutTextWindow.setEndIconOnClickListener {
             val username = binding.usernameEditText.text.toString()
-            viewModel.onShowRepository(username)
+            if (username == null) {
+                Toast.makeText(context, "Введите nickname", Toast.LENGTH_LONG).show()
+            } else {
+                viewModel.onShowRepository(username)
+            }
         }
         binding.inputLayoutTextWindow.setStartIconOnClickListener {
-            activity?.supportFragmentManager?.let{ fragment ->
+            activity?.supportFragmentManager?.let { fragment ->
                 fragment.beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.container_main, DetailFragment.newInstance(null))
-                .commit()
+                    .addToBackStack(null)
+                    .replace(R.id.container_main, DetailFragment.newInstance(null))
+                    .commit()
             }
         }
     }
