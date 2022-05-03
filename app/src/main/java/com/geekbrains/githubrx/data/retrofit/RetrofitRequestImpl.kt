@@ -8,9 +8,7 @@ import io.reactivex.rxjava3.core.Single
 import retrofit2.Retrofit
 
 
-class RetrofitRequestImpl(private val retrofit: Retrofit) : RepositoryList, RepositoryDetailUser {
-
-    private val api: GitHubAPI = retrofit.create(GitHubAPI::class.java)
+class RetrofitRequestImpl(private val api: GitHubAPI) : RepositoryList, RepositoryDetailUser {
 
     override fun observeReposForUser(username: String): Single<List<GitProjectEntity>> {
         return api.listRepos(username)

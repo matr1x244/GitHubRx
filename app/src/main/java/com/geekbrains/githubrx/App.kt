@@ -3,6 +3,7 @@ package com.geekbrains.githubrx
 import android.app.Application
 import android.content.Context
 import androidx.fragment.app.Fragment
+import com.geekbrains.githubrx.data.retrofit.GitHubAPI
 import com.geekbrains.githubrx.data.retrofit.RetrofitRequestImpl
 import com.geekbrains.githubrx.domain.RepositoryDetailUser
 import com.geekbrains.githubrx.domain.RepositoryList
@@ -28,12 +29,14 @@ class App : Application() {
             .build()
     }
 
+    private val gitHubAPI: GitHubAPI = retrofit.create(GitHubAPI::class.java)
+
     /**
      * подключаемcя к retrofit как либо запросы
      */
-    val getHubListUser: RepositoryList by lazy { RetrofitRequestImpl(retrofit) }
+    val getHubListUser: RepositoryList by lazy { RetrofitRequestImpl(gitHubAPI) }
 
-    val getHubDetailUser: RepositoryDetailUser by lazy { RetrofitRequestImpl(retrofit) }
+    val getHubDetailUser: RepositoryDetailUser by lazy { RetrofitRequestImpl(gitHubAPI) }
 }
 
 val Context.app: App
