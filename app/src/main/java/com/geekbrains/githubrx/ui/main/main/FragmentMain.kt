@@ -8,14 +8,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.geekbrains.githubrx.R
-import com.geekbrains.githubrx.app
 import com.geekbrains.githubrx.databinding.FragmentMainBinding
-import com.geekbrains.githubrx.ui.main.main.adapter.RecyclerViewAdapter
 import com.geekbrains.githubrx.ui.main.detail.DetailFragment
-import com.google.android.material.snackbar.Snackbar
+import com.geekbrains.githubrx.ui.main.main.adapter.RecyclerViewAdapter
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FragmentMain : Fragment() {
 
@@ -26,7 +25,8 @@ class FragmentMain : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: MainViewModel by viewModels { MainViewModelFactory(app.getHubListUser) }
+    private val viewModel: MainViewModel by viewModel()
+//    private val viewModel: MainViewModel by viewModels { MainViewModelFactory(app.getHubListUser) }
 
     private val controller by lazy { activity as MainViewModel.Controller }
 

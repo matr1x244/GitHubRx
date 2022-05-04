@@ -5,16 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import coil.load
-import com.geekbrains.githubrx.app
 import com.geekbrains.githubrx.databinding.FragmentDetailBinding
 import com.geekbrains.githubrx.domain.GitProjectEntity
-import com.geekbrains.githubrx.domain.GitProjectUserDetail
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment() {
 
-    private val viewModel: DetailViewModel by viewModels { DetailViewModelFactory(app.getHubDetailUser) }
+    private val viewModel: DetailViewModel by viewModel()
+//    private val viewModel: DetailViewModel by viewModels { DetailViewModelFactory(app.getHubDetailUser) }
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
@@ -63,8 +62,15 @@ class DetailFragment : Fragment() {
 
     private fun initIncomingEvents() {
         viewModel.repos.observe(viewLifecycleOwner) {
-            val username = binding.textNameLogin.toString()
-           viewModel.onShowLogin(username) // подхватываем обновления и запрашиваем
+            /**
+             * правки
+             */
+            val login = detailArguments()?.login
+            if (login != null) {
+                viewModel.onShowLogin(login)
+                }else{
+                viewModel.onShowLogin("matr1x0")
+            } // подхватываем обновления и запрашиваем
         }
     }
 
