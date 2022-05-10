@@ -1,6 +1,7 @@
 package com.geekbrains.githubrx.ui.main.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,11 +60,16 @@ class DetailFragment : Fragment() {
         val avatarUrl = "https://avatars.githubusercontent.com/u/${detailArguments()?.id}?v=4"
         if (detailArguments()?.login != null){
             binding.textNameLogin.text = detailArguments()?.login
+            Log.d("login", "binding.textNameLogin.text = detailArguments()?.login")
+            viewModel.onShowLogin(detailArguments()?.login.toString())
         } else{
             binding.textNameLogin.text = detailArguments()?.name
+            Log.d("login", "binding.textNameLogin.text = detailArguments()?.name")
         }
         binding.textLocation.text = detailArguments()?.location
+        Log.d("location", "binding.textLocation.text = detailArguments()?.location")
         binding.avatarUrl.load(avatarUrl)
+        Log.d("load", "binding.avatarUrl.load(avatarUrl)")
     }
 
     private fun detailArguments(): GitProjectEntity? {
