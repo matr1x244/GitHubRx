@@ -62,8 +62,8 @@ class AppModuleDagger(private val context: Context) {
     @Provides
     fun provideRetrofit(
         @Named("base_url") baseUrl: String,
-        converterFactory: GsonConverterFactory,
-        callAdapterFactory: RxJava3CallAdapterFactory
+        converterFactory: Converter.Factory,
+        callAdapterFactory: CallAdapter.Factory
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)

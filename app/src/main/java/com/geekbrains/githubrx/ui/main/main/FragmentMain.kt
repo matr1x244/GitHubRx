@@ -64,7 +64,7 @@ class FragmentMain : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        app.appDependenciesComponent.inject(this) //получаем доступ из app к appDependenciesComponent
+        app.appDependenciesComponent.injectMain(this) //получаем доступ из app к appDependenciesComponent
 
         initViews()
         initOutgoingEvents()

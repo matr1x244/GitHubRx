@@ -5,15 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import coil.load
+import com.geekbrains.githubrx.app
 import com.geekbrains.githubrx.databinding.FragmentDetailBinding
 import com.geekbrains.githubrx.domain.GitProjectEntity
+import com.geekbrains.githubrx.domain.RepositoryDetailUser
+import com.geekbrains.githubrx.domain.RepositoryList
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import javax.inject.Inject
 
 class DetailFragment : Fragment() {
 
-    private val viewModel: DetailViewModel by viewModel()
-//    private val viewModel: DetailViewModel by viewModels { DetailViewModelFactory(app.getHubDetailUser) }
+//    private val viewModel: DetailViewModel by viewModel()
+
+    @Inject
+    lateinit var getRepositoryDetailUser: RepositoryDetailUser
+    private val viewModel: DetailViewModel by viewModels { DetailViewModelFactory(getRepositoryDetailUser) }
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
@@ -39,6 +47,8 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        app.appDependenciesComponent.injectDetail(this) //получаем доступ из app к appDependenciesComponent
 
         initViews()
         initIncomingEvents()
