@@ -6,9 +6,11 @@ import com.geekbrains.githubrx.R
 import com.geekbrains.githubrx.databinding.ActivityMainBinding
 import com.geekbrains.githubrx.domain.GitProjectEntity
 import com.geekbrains.githubrx.domain.GitProjectUserDetail
+import com.geekbrains.githubrx.domain.RepositoryList
 import com.geekbrains.githubrx.ui.main.detail.DetailFragment
 import com.geekbrains.githubrx.ui.main.main.FragmentMain
 import com.geekbrains.githubrx.ui.main.main.MainViewModel
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainViewModel.Controller {
 

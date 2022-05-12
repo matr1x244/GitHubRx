@@ -5,19 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import coil.load
+import com.geekbrains.githubrx.app
 import com.geekbrains.githubrx.databinding.FragmentDetailBinding
 import com.geekbrains.githubrx.domain.GitProjectEntity
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.geekbrains.githubrx.domain.RepositoryDetailUser
+import javax.inject.Inject
 
 class DetailFragment : Fragment() {
 
-    private val viewModel: DetailViewModel by viewModel()
-//    private val viewModel: DetailViewModel by viewModels { DetailViewModelFactory(app.getHubDetailUser) }
+    /**
+     * Dagger
+     */
+    @Inject
+    lateinit var getRepositoryDetailUser: RepositoryDetailUser
+    private val viewModel: DetailViewModel by viewModels { DetailViewModelFactory(getRepositoryDetailUser) }
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
-
 
     companion object {
         const val ARGS_KEY = "ARGS_KEY"
@@ -40,37 +46,34 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        app.appDependenciesComponent.injectDetail(this) //получаем доступ из app к appDependenciesComponent
+
         initViews()
         initIncomingEvents()
-    }
-
-    private fun initViews() {
-        detailArguments()
-        val avatarUrl = "https://avatars.githubusercontent.com/u/${detailArguments()?.id}?v=4"
-        if (detailArguments()?.login != null){
-            binding.textNameLogin.text = detailArguments()?.login
-        } else{
-            binding.textNameLogin.text = detailArguments()?.name
-        }
-        binding.textLocation.text = detailArguments()?.location
-        binding.avatarUrl.load(avatarUrl)
     }
 
     private fun detailArguments(): GitProjectEntity? {
         return arguments?.getParcelable(ARGS_KEY)
     }
 
+    private fun initViews() {
+        if (detailArguments()?.login != null){
+            binding.textNameLogin.text = detailArguments()?.login
+        } else{
+            binding.textNameLogin.text = detailArguments()?.name
+        }
+        val avatarUrl = "https://avatars.githubusercontent.com/u/${detailArguments()?.id}?v=4"
+        binding.avatarUrl.load(avatarUrl)
+    }
+
     private fun initIncomingEvents() {
         viewModel.repos.observe(viewLifecycleOwner) {
-            /**
-             * правки
-             */
             val login = detailArguments()?.login
             if (login != null) {
                 viewModel.onShowLogin(login)
                 }else{
                 viewModel.onShowLogin("matr1x0")
-            } // подхватываем обновления и запрашиваем
+            }
         }
     }
 

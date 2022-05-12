@@ -37,6 +37,7 @@ val appModuleKoin = module {
     factory<Converter.Factory> { GsonConverterFactory.create() }
     factory<CallAdapter.Factory> { RxJava3CallAdapterFactory.create() }
 
+
     /**
      * import org.koin.androidx.viewmodel.ext.android.viewModel
      */
