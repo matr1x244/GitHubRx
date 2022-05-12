@@ -15,6 +15,8 @@ import javax.inject.Inject
 
 class DetailFragment : Fragment() {
 
+//    private val viewModel: DetailViewModel by viewModel() // KOIN
+
     /**
      * Dagger
      */

@@ -32,6 +32,11 @@ class FragmentMain : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
+//    private val viewModel: MainViewModel by viewModel() //KOIN
+
+    /**
+     * Dagger
+     */
     @Inject
     lateinit var getRepositoryList: RepositoryList
     private val viewModel: MainViewModel by viewModels { MainViewModelFactory(getRepositoryList) }
