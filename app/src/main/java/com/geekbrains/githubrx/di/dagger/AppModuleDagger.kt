@@ -45,7 +45,7 @@ class AppModuleDagger(private val context: Context) {
     @Provides
     @Named("username")
     fun provideDefaultUserName(): String {
-        return "matr1x244"
+        return "matr1x0"
     }
 
     @Provides

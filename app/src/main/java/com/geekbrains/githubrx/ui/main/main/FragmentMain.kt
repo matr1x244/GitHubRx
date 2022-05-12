@@ -32,8 +32,6 @@ class FragmentMain : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-//    private val viewModel: MainViewModel by viewModel()
-
     @Inject
     lateinit var getRepositoryList: RepositoryList
     private val viewModel: MainViewModel by viewModels { MainViewModelFactory(getRepositoryList) }
@@ -81,7 +79,7 @@ class FragmentMain : Fragment() {
 //        adapter.setHasStableIds(true) // сетит список (типа внутр. diffutils)
         binding.recyclerView.adapter = adapter
 
-        binding.usernameEditText.setText(app.appDependenciesComponent.getDefaultUserName())
+        binding.usernameEditText.setText(app.appDependenciesComponent.getDefaultUserName()) // создаем стандартный username dagger
     }
 
     private fun initOutgoingEvents() {
