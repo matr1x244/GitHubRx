@@ -67,8 +67,8 @@ class DetailFragment : Fragment() {
         viewModel.repos.observe(viewLifecycleOwner) {
             val avatarUrl = "https://avatars.githubusercontent.com/u/${detailArguments()?.id}?v=4"
             binding.avatarUrl.load(avatarUrl)
-            if (viewModel.onShowLogin(detailArguments()?.login) == null) {
-                binding.textNameLogin.text = it.name
+            if (binding.textNameLogin == null) {
+                binding.textNameLogin.text = detailArguments()?.name
             } else {
                 binding.textNameLogin.text = it.login
                 binding.textLocation.text = it.location
