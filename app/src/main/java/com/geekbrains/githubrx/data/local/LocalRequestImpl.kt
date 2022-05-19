@@ -16,6 +16,7 @@ class LocalRequestImpl : RepositoryList, RepositoryDetailUser {
         return Single.just(localList)
     }
 
+
     override fun observerReposListUser(): Single<List<GitProjectEntity>> {
         val localList = listOf(
             GitProjectEntity(1, "???", "", "","location1"),
@@ -24,10 +25,8 @@ class LocalRequestImpl : RepositoryList, RepositoryDetailUser {
         return Single.just(localList)
     }
 
-    override fun observerUserDetail(username: String): Single<List<GitProjectUserDetail>> {
-        val localList = listOf (
-            GitProjectUserDetail(55, "&&&111", "","location3")
-        )
+    override fun observerUserDetail(username: String): Single<GitProjectUserDetail> {
+        val localList = GitProjectUserDetail(55, "&&&111", "","location3","sad")
         return Single.just(localList)
     }
 }

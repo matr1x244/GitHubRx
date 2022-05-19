@@ -51,7 +51,6 @@ class DetailFragment : Fragment() {
         app.appDependenciesComponent.injectDetail(this) //получаем доступ из app к appDependenciesComponent
 
         initViews()
-        initIncomingEvents()
     }
 
     private fun detailArguments(): GitProjectEntity? {
@@ -59,22 +58,20 @@ class DetailFragment : Fragment() {
     }
 
     private fun initViews() {
-        if (detailArguments()?.login != null){
-            binding.textNameLogin.text = detailArguments()?.login
-        } else{
-            binding.textNameLogin.text = detailArguments()?.name
-        }
-        val avatarUrl = "https://avatars.githubusercontent.com/u/${detailArguments()?.id}?v=4"
-        binding.avatarUrl.load(avatarUrl)
+            viewModel.onShowLogin(detailArguments()?.login)
+            initIncomingEvents()
+
     }
 
     private fun initIncomingEvents() {
         viewModel.repos.observe(viewLifecycleOwner) {
-            val login = detailArguments()?.login
-            if (login != null) {
-                viewModel.onShowLogin(login)
-                }else{
-                viewModel.onShowLogin("matr1x0")
+            val avatarUrl = "https://avatars.githubusercontent.com/u/${detailArguments()?.id}?v=4"
+            binding.avatarUrl.load(avatarUrl)
+            if (viewModel.onShowLogin(detailArguments()?.login) == null) {
+                binding.textNameLogin.text = it.name
+            } else {
+                binding.textNameLogin.text = it.login
+                binding.textLocation.text = it.location
             }
         }
     }

@@ -29,7 +29,6 @@ class ViewHolderRepositoryUser(itemView: View) : ViewHolder(itemView) {
         }
         binding.itemGitRepoId.text = item.id.toString()
         binding.itemGitRepoName.text = item.name
-        binding.itemGitLocation.text = item.location
         binding.cardViewRepositoryContainer.setOnClickListener {
             listener.invoke(item)
         }

@@ -29,7 +29,6 @@ class ViewHolderListUsers(itemView: View) : ViewHolder(itemView) {
         }
         binding.itemGitId.text = item.id.toString()
         binding.itemGitLogin.text = item.login
-        binding.itemGitLocation.text = item.location
         binding.cardViewLoginContainer.setOnClickListener {
             listener.invoke(item)
         }

@@ -12,7 +12,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.geekbrains.githubrx.R
 import com.geekbrains.githubrx.app
-import com.geekbrains.githubrx.data.local.LocalRequestImpl
 import com.geekbrains.githubrx.data.retrofit.RetrofitRequestImpl
 import com.geekbrains.githubrx.databinding.FragmentMainBinding
 import com.geekbrains.githubrx.domain.GitProjectEntity
@@ -21,6 +20,7 @@ import com.geekbrains.githubrx.ui.main.detail.DetailFragment
 import com.geekbrains.githubrx.ui.main.main.adapter.RecyclerViewAdapter
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 import javax.inject.Inject
 
 class FragmentMain : Fragment() {

@@ -6,6 +6,7 @@ import com.geekbrains.githubrx.domain.RepositoryDetailUser
 import com.geekbrains.githubrx.domain.RepositoryList
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Retrofit
+import java.util.*
 
 
 class RetrofitRequestImpl(private val api: GitHubAPI) : RepositoryList, RepositoryDetailUser {
@@ -14,11 +15,12 @@ class RetrofitRequestImpl(private val api: GitHubAPI) : RepositoryList, Reposito
         return api.listRepos(username)
     }
 
+
     override fun observerReposListUser(): Single<List<GitProjectEntity>> {
         return api.listUsers()
     }
 
-    override fun observerUserDetail(username: String): Single<List<GitProjectUserDetail>> {
+    override fun observerUserDetail(username: String): Single<GitProjectUserDetail> {
         return api.userDetail(username)
     }
 }
