@@ -60,15 +60,15 @@ class DetailFragment : Fragment() {
     private fun initViews() {
             viewModel.onShowLogin(detailArguments()?.login)
             initIncomingEvents()
-
     }
 
     private fun initIncomingEvents() {
         viewModel.repos.observe(viewLifecycleOwner) {
             val avatarUrl = "https://avatars.githubusercontent.com/u/${detailArguments()?.id}?v=4"
             binding.avatarUrl.load(avatarUrl)
-            if (binding.textNameLogin == null) {
+            if (detailArguments()?.login == null) {
                 binding.textNameLogin.text = detailArguments()?.name
+                binding.textLocation.text = ""
             } else {
                 binding.textNameLogin.text = it.login
                 binding.textLocation.text = it.location
