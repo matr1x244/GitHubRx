@@ -3,10 +3,13 @@ package com.geekbrains.githubrx.ui.main.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.geekbrains.githubrx.domain.GitProjectUserDetail
 import com.geekbrains.githubrx.domain.RepositoryDetailUser
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.kotlin.subscribeBy
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DetailViewModel(private val getDetailUser: RepositoryDetailUser) : ViewModel() {
 
@@ -15,19 +18,28 @@ class DetailViewModel(private val getDetailUser: RepositoryDetailUser) : ViewMod
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable() // метод отписки RX
 
+//    fun onShowLogin(username: String?) {
+//        compositeDisposable.add(
+//            getDetailUser
+//                .observerUserDetail(username.toString())
+//                .subscribeBy(
+//                    onSuccess = {
+//                        _repos.postValue(it)
+//                    },
+//                    onError = {
+//                        //....
+//                    }
+//                )
+//        )
+//    }
+
     fun onShowLogin(username: String?) {
-        compositeDisposable.add(
-            getDetailUser
-                .observerUserDetail(username.toString())
-                .subscribeBy(
-                    onSuccess = {
-                        _repos.postValue(it)
-                    },
-                    onError = {
-                        //....
-                    }
-                )
-        )
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = getDetailUser.observerUserDetail(username.toString())
+            withContext(Dispatchers.Main) {
+                _repos.postValue(result)
+            }
+        }
     }
 
     override fun onCleared() {

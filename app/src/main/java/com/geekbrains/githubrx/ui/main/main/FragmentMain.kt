@@ -8,20 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.geekbrains.githubrx.R
-import com.geekbrains.githubrx.app
-import com.geekbrains.githubrx.data.retrofit.RetrofitRequestImpl
 import com.geekbrains.githubrx.databinding.FragmentMainBinding
-import com.geekbrains.githubrx.domain.GitProjectEntity
-import com.geekbrains.githubrx.domain.RepositoryList
 import com.geekbrains.githubrx.ui.main.detail.DetailFragment
 import com.geekbrains.githubrx.ui.main.main.adapter.RecyclerViewAdapter
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
-import javax.inject.Inject
 
 class FragmentMain : Fragment() {
 
@@ -32,14 +24,7 @@ class FragmentMain : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-//    private val viewModel: MainViewModel by viewModel() //KOIN
-
-    /**
-     * Dagger
-     */
-    @Inject
-    lateinit var getRepositoryList: RepositoryList
-    private val viewModel: MainViewModel by viewModels { MainViewModelFactory(getRepositoryList) }
+    private val viewModel: MainViewModel by viewModel() //KOIN
 
     private val controller by lazy { activity as MainViewModel.Controller }
 
@@ -66,12 +51,10 @@ class FragmentMain : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        app.appDependenciesComponent.injectMain(this) //получаем доступ из app к appDependenciesComponent
-
         initViews()
         initOutgoingEvents()
         initIncomingEvents()
+
     }
 
     private fun initViews() {
@@ -83,8 +66,6 @@ class FragmentMain : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
 //        adapter.setHasStableIds(true) // сетит список (типа внутр. diffutils)
         binding.recyclerView.adapter = adapter
-
-        binding.usernameEditText.setText(app.appDependenciesComponent.getDefaultUserName()) // создаем стандартный username dagger
     }
 
     private fun initOutgoingEvents() {

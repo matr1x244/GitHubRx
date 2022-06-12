@@ -5,27 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import coil.load
-import com.geekbrains.githubrx.app
 import com.geekbrains.githubrx.databinding.FragmentDetailBinding
 import com.geekbrains.githubrx.domain.GitProjectEntity
-import com.geekbrains.githubrx.domain.RepositoryDetailUser
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class DetailFragment : Fragment() {
 
-//    private val viewModel: DetailViewModel by viewModel() // KOIN
-
-    /**
-     * Dagger
-     */
-    @Inject
-    lateinit var getRepositoryDetailUser: RepositoryDetailUser
-    private val viewModel: DetailViewModel by viewModels { DetailViewModelFactory(getRepositoryDetailUser) }
+    private val viewModel: DetailViewModel by viewModel() // KOIN
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
+
 
     companion object {
         const val ARGS_KEY = "ARGS_KEY"
@@ -48,8 +40,6 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        app.appDependenciesComponent.injectDetail(this) //получаем доступ из app к appDependenciesComponent
-
         initViews()
     }
 
@@ -58,8 +48,8 @@ class DetailFragment : Fragment() {
     }
 
     private fun initViews() {
-            viewModel.onShowLogin(detailArguments()?.login)
-            initIncomingEvents()
+        viewModel.onShowLogin(detailArguments()?.login)
+        initIncomingEvents()
     }
 
     private fun initIncomingEvents() {
