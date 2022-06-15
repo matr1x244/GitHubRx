@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.geekbrains.githubrx.domain.GitProjectUserDetail
 import com.geekbrains.githubrx.domain.RepositoryDetailUser
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.flow
 
 class DetailViewModel(private val getDetailUser: RepositoryDetailUser) : ViewModel() {
 
@@ -19,6 +20,9 @@ class DetailViewModel(private val getDetailUser: RepositoryDetailUser) : ViewMod
             Log.v("@@@", "No success $throwable")
         }
 
+    /**
+     * RxJava
+     */
 //    fun onShowLogin(username: String?) {
 //        compositeDisposable.add(
 //            getDetailUser
@@ -34,11 +38,30 @@ class DetailViewModel(private val getDetailUser: RepositoryDetailUser) : ViewMod
 //        )
 //    }
 
+    /**
+     * Coroutine base
+     */
+//    fun onShowLogin(username: String?) {
+//        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler + SupervisorJob()) {
+//            val result = getDetailUser.observerUserDetail(username.toString())
+//            withContext(Dispatchers.Main) {
+//                _repos.postValue(result)
+//            }
+//        }
+//    }
+
+    /**
+     * Coroutine Flow
+     */
     fun onShowLogin(username: String?) {
+        val flow = flow {
+            emit(getDetailUser.observerUserDetail(username.toString()))
+        }
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler + SupervisorJob()) {
-            val result = getDetailUser.observerUserDetail(username.toString())
-            withContext(Dispatchers.Main) {
-                _repos.postValue(result)
+            flow.collect {
+                withContext(Dispatchers.Main) {
+                    _repos.postValue(it)
+                }
             }
         }
     }
